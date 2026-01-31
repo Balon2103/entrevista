@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const path = require("path");
 const cors = require("cors");
-const { v4: uuidv4 } = require("uuid"); // <-- Para generar IDs únicas
+const { v4: uuidv4 } = require("uuid"); // Para generar IDs únicas
 
 dotenv.config();
 
@@ -13,13 +13,13 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://www.fupagua.org", "https://fupagua.org"], // tus dominios que pueden llamar
+    origin: ["https://www.fupagua.org", "https://fupagua.org"], // dominios permitidos
     methods: ["GET", "POST"],
     credentials: true,
   }),
 );
 
-// límite de tamaño
+// Límite de tamaño de requests
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
@@ -46,25 +46,9 @@ mongoose
     console.error(error.message);
   });
 
-// --- RUTAS API EXISTENTES ---
+// --- RUTAS API ---
 const rutasGestion = require("./1.3-rutas/gestion.rutas.js");
 app.use("/api", rutasGestion);
-
-// --- NUEVA RUTA PARA GENERAR LINK ÚNICO ---
-app.post("/api/generar-entrevista", (req, res) => {
-  // Genera un ID único para la entrevista
-  const uniqueId = uuidv4();
-
-  // Opcional: guardarlo en la DB
-  // const Entrevista = require("./models/Entrevista");
-  // Entrevista.create({ _id: uniqueId, creadaEn: new Date() });
-
-  // Construye el link completo
-  const url = `https://entrevista.fupagua.org/${uniqueId}`;
-
-  // Devuelve JSON
-  res.json({ url });
-});
 
 // --- Ruta raíz ---
 app.get("/", (req, res) => {
