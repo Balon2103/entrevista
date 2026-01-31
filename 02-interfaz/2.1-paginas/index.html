@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia Clínica - Entrevista Inicial</title>
+    <link rel="stylesheet" href="/estilos/estilo.css">
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</head>
+<body>
+
+    <div class="form-container">
+        <header>
+            <img src="/logo.png" alt="Logo">
+            <h1>ENTREVISTA MÉDICO, EDUCATIVO, SOCIAL Y FAMILIAR</h1>
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+        </header>
+
+        <form id="formHistoriaClinica">
+        <div class="nota-padres">
+    <div class="nota-icon">💡</div>
+    <div class="nota-contenido">
+        <p><strong>Papás:</strong> Antes de iniciar, es importante recordarles que esta entrevista forma parte de un conjunto de instrumentos para realizar una evaluación integral, por lo que es necesario que lo respondan de manera clara, precisa y sincera.</p>
+        <p>Es completamente confidencial. Si tienen alguna duda, pregunten a sus seres cercanos; si persiste, márquenlo con un <strong>*</strong> para aclararlo en nuestra reunión. Hay secciones que por la corta edad de su hijo(a) no les corresponden, pueden saltarlas. Toda la información solicitada es necesaria. ¡Gracias por su colaboración!</p>
+    </div>
+</div>
+
+<div class="form-step active" data-step="1">
+    <h2>I. DATOS PERSONALES</h2>
+    
+    <div class="input-group">
+        <label>Número de Historia Clínica:</label>
+        <input type="text" id="numHistoria" name="numHistoria" readonly class="input-readonly">
+    </div>
+
+    <div class="input-group">
+        <label>Nombres y Apellidos:</label>
+        <input type="text" id="nombreNiño" name="nombreNiño" required placeholder="Nombre completo del evaluado">
+    </div>
+
+    <div class="grid-inputs">
+        <div class="input-group">
+            <label>Lugar de Nacimiento:</label>
+            <input type="text" name="lugarNacimiento">
+        </div>
+        <div class="input-group">
+            <label>Fecha de Nacimiento:</label>
+            <input type="date" name="fechaNacimiento">
+        </div>
+    </div>
+
+    <div class="grid-inputs">
+        <div class="input-group">
+            <label>Edad:</label>
+            <input type="text" name="edad" placeholder="Ej: 5 años y 3 meses">
+        </div>
+        <div class="input-group">
+            <label>Sexo:</label>
+            <select name="sexo">
+                <option value="">Seleccione...</option>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="grid-inputs">
+        <div class="input-group">
+            <label>Escolaridad:</label>
+            <input type="text" name="escolaridad">
+        </div>
+        <div class="input-group">
+            <label>Institución:</label>
+            <input type="text" name="institucion">
+        </div>
+    </div>
+
+    <div class="grid-inputs">
+        <div class="input-group">
+            <label>Procedencia:</label>
+            <input type="text" name="procedencia">
+        </div>
+        <div class="input-group">
+            <label>Teléfono:</label>
+            <input type="tel" name="telefono">
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label>Dirección:</label>
+        <textarea name="direccion" rows="2"></textarea>
+    </div>
+
+    <div class="grid-inputs">
+        <div class="input-group">
+            <label>Datos proporcionados por:</label>
+            <input type="text" name="informante">
+        </div>
+        <div class="input-group">
+            <label>Relación de parentesco:</label>
+            <input type="text" name="parentesco" placeholder="Ej: Madre, Padre, Abuela...">
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="button" class="btn-next" onclick="nextStep(2)">Siguiente Sección</button>
+    </div>
+</div>
+<div class="form-step" data-step="2">
+    <h2>II. MOTIVO DE CONSULTA</h2>
+    
+    <div class="nota-informativa">
+        <p>Para comenzar, ¿podría decirme la razón por la cual su hijo o hija está siendo traído a evaluación?</p>
+    </div>
+
+    <div class="input-group">
+        <label>Razón de la evaluación:</label>
+        <textarea name="motivoConsultaPrincipal" rows="3"></textarea>
+    </div>
+
+    <div class="grid-inputs">
+        <div class="input-group">
+            <label>Referido por:</label>
+            <input type="text" name="referidoPor">
+        </div>
+        <div class="input-group">
+            <label>Edad cuando notó diferencia en desarrollo (d2):</label>
+            <input type="text" name="edadDeteccionDiferencia">
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label>Descripción de la conducta o situación preocupante desde sus inicios:</label>
+        <textarea name="descripcionConductaInicios" rows="3"></textarea>
+    </div>
+
+    <div class="input-group">
+        <label>Diagnósticos previos, quién lo realizó y resultados de exámenes:</label>
+        <textarea name="diagnosticosPreviosResultados" rows="3" placeholder="Mencione cronológicamente..."></textarea>
+    </div>
+
+    <div class="input-group">
+        <label>Tratamientos recibidos, tiempo, evolución y recomendaciones:</label>
+        <textarea name="tratamientosEvolucion" rows="3"></textarea>
+    </div>
+
+    <div class="actions">
+        <button type="button" class="btn-prev" onclick="prevStep(1)">Anterior</button>
+        <button type="button" class="btn-next" onclick="nextStep(3)">Siguiente Sección</button>
+    </div>
+</div>
+
+<div class="form-step" data-step="3">
+    <h2>III. ENTORNO FAMILIAR</h2>
+    
+    <div class="nota-informativa">
+        <p>Ahora bien, detengámonos en la FAMILIA.</p>
+    </div>
+
+    <div class="familiar-card">
+        <h3>DATOS DE LA MADRE BIOLÓGICA</h3>
+        <div class="input-group"><label>Nombres y Apellidos:</label><input type="text" name="madreNombre"></div>
+        <div class="grid-inputs">
+            <div class="input-group"><label>Edad:</label><input type="text" name="madreEdad"></div>
+            <div class="input-group"><label>Nacionalidad:</label><input type="text" name="madreNacionalidad"></div>
+            <div class="input-group"><label>Cédula:</label><input type="text" name="madreCedula"></div>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group"><label>Grado de instrucción:</label><input type="text" name="madreInstruccion"></div>
+            <div class="input-group"><label>Ocupación:</label><input type="text" name="madreOcupacion"></div>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group"><label>Horario de trabajo:</label><input type="text" name="madreHorario"></div>
+            <div class="input-group"><label>Sueldo que devenga:</label><input type="text" name="madreSueldo"></div>
+        </div>
+        <div class="input-group"><label>De no trabajar, sustento familiar:</label><input type="text" name="madreSustentoAlterno"></div>
+        <div class="grid-inputs">
+            <div class="input-group"><label>Estado civil:</label><input type="text" name="madreEstadoCivil"></div>
+            <div class="input-group"><label>Teléfono:</label><input type="tel" name="madreTelefono"></div>
+        </div>
+        <div class="input-group"><label>Dirección (si no habita con el niño):</label><textarea name="madreDireccionExtra" rows="2"></textarea></div>
+        <div class="input-group"><label>¿Cómo es la relación con el niño/a?</label><textarea name="madreRelacion" rows="2"></textarea></div>
+        <div class="input-group"><label>Opinión sobre la conducta del niño/a:</label><textarea name="madreOpinionConducta" rows="2"></textarea></div>
+    </div>
+
+    <div class="familiar-card">
+        <h3>DATOS DEL PADRE BIOLÓGICO</h3>
+        <div class="input-group"><label>Nombres y Apellidos:</label><input type="text" name="padreNombre"></div>
+        <div class="grid-inputs">
+            <div class="input-group"><label>Edad:</label><input type="text" name="padreEdad"></div>
+            <div class="input-group"><label>Nacionalidad:</label><input type="text" name="padreNacionalidad"></div>
+            <div class="input-group"><label>Cédula:</label><input type="text" name="padreCedula"></div>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group"><label>Grado de instrucción:</label><input type="text" name="padreInstruccion"></div>
+            <div class="input-group"><label>Ocupación:</label><input type="text" name="padreOcupacion"></div>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group"><label>Horario de trabajo:</label><input type="text" name="padreHorario"></div>
+            <div class="input-group"><label>Sueldo que devenga:</label><input type="text" name="padreSueldo"></div>
+        </div>
+        <div class="input-group"><label>De no trabajar, sustento familiar:</label><input type="text" name="padreSustentoAlterno"></div>
+        <div class="grid-inputs">
+            <div class="input-group"><label>Estado civil:</label><input type="text" name="padreEstadoCivil"></div>
+            <div class="input-group"><label>Teléfono:</label><input type="tel" name="padreTelefono"></div>
+        </div>
+        <div class="input-group"><label>Dirección (si no habita con el niño):</label><textarea name="padreDireccionExtra" rows="2"></textarea></div>
+        <div class="input-group"><label>¿Cómo es la relación con el niño/a?</label><textarea name="padreRelacion" rows="2"></textarea></div>
+        <div class="input-group"><label>Opinión sobre la conducta del niño/a:</label><textarea name="padreOpinionConducta" rows="2"></textarea></div>
+    </div>
+
+    <div class="familiar-card highlight">
+        <h3>DINÁMICA FAMILIAR Y HERMANOS</h3>
+        <div class="input-group">
+            <label>Describa la dinámica, nombres y edades de hermanos (Indique si son biológicos, adoptados, etc.):</label>
+            <textarea name="dinamicaHermanos" rows="4"></textarea>
+        </div>
+        <div class="input-group">
+            <label>Relación de cada uno con el niño. ¿Quién influye? ¿Quién lo cuida? ¿Quién lo orienta?</label>
+            <textarea name="influenciaOrientacion" rows="4"></textarea>
+        </div>
+    </div>
+
+    <div class="familiar-card">
+        <h3>CUIDADORES PERMANENTES (Si aplica)</h3>
+        <div class="input-group">
+            <label>Persona a cargo:</label>
+            <select name="cuidadorTipo">
+                <option value="madre_no_bio">Madre (No biológica)</option>
+                <option value="padre_no_bio">Padre (No biológico)</option>
+                <option value="cuidador">Al cuidado de:</option>
+            </select>
+        </div>
+        <div class="input-group"><label>Nombres y Apellidos:</label><input type="text" name="cuidadorNombre"></div>
+        <div class="grid-inputs">
+            <div class="input-group"><label>Edad:</label><input type="text" name="cuidadorEdad"></div>
+            <div class="input-group"><label>Cédula:</label><input type="text" name="cuidadorCedula"></div>
+        </div>
+        <div class="input-group"><label>¿Cómo es la relación y qué opinión tiene de su conducta?</label><textarea name="cuidadorRelacionOpinion" rows="3"></textarea></div>
+    </div>
+
+    <div class="familiar-card">
+        <h3>ANTECEDENTES DEL DESARROLLO EN LA FAMILIA</h3>
+        <div class="input-group">
+            <label>Dificultades en hermanos (Hablar/caminar tarde, aprendizaje, etc.):</label>
+            <textarea name="antecedentesHermanos" rows="3"></textarea>
+        </div>
+        <div class="input-group">
+            <label>Dificultades en padres biológicos (Desarrollo o enfermedades):</label>
+            <textarea name="antecedentesPadres" rows="3"></textarea>
+        </div>
+        <div class="input-group">
+            <label>Familia extendida con dificultades similares o enfermedades:</label>
+            <textarea name="antecedentesFamiliaExtendida" rows="3"></textarea>
+        </div>
+    </div>
+
+    <div class="familiar-card">
+        <h3>ANTECEDENTES DE ADOPCIÓN (Si aplica)</h3>
+        <div class="input-group">
+            <label>Antecedentes conocidos, edad de inicio, acuerdos y reacción familiar:</label>
+            <textarea name="datosAdopcionCompleto" rows="4"></textarea>
+        </div>
+    </div>
+
+    <div class="nota-padres">
+        <div class="nota-contenido">
+            <h3>AFECTOS A CONSIDERAR EN MI FAMILIA</h3>
+            <p>Por favor, describa brevemente cómo vive estos aspectos en su hogar:</p>
+            <div class="input-group">
+                <textarea name="afectosFamiliares" rows="6" placeholder="Considerar: Toma de decisiones, ahorro, cariño en casa, reglas claras, autonomía, resolución de problemas, relación de pareja, armonía vecinal..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="button" class="btn-prev" onclick="prevStep(2)">Anterior</button>
+        <button type="button" class="btn-next" onclick="nextStep(4)">Siguiente Sección</button>
+    </div>
+</div>
+<div class="form-step" data-step="4">
+    <h2>IV. DATOS SOCIOECONÓMICOS</h2>
+    
+    <div class="grid-inputs">
+        <div class="input-group">
+            <label>Tipo de vivienda:</label>
+            <select name="tipoVivienda">
+                <option value="">Seleccione...</option>
+                <option value="casa">Casa</option>
+                <option value="apartamento">Apartamento</option>
+                <option value="finca">Finca</option>
+                <option value="rancho">Rancho</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>¿De quién es la casa?</label>
+            <input type="text" name="propiedadCasa" placeholder="Ej: Propia, alquilada, de familiares...">
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label>¿Tiene acceso frecuente a servicios básicos?</label>
+        <p class="sub-label">(Agua, aseo, cloacas, electricidad, transporte, mantenimiento de vías)</p>
+        <textarea name="serviciosBasicos" rows="2" placeholder="Describa la regularidad de los servicios..."></textarea>
+    </div>
+
+    <div class="grid-inputs">
+        <div class="input-group">
+            <label>¿Es compartida?</label>
+            <select name="casaCompartida">
+                <option value="no">No</option>
+                <option value="si">Sí</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Explique (con quién):</label>
+            <input type="text" name="casaCompartidaExplica">
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label>¿Cuántas habitaciones tiene y cómo las comparten?</label>
+        <textarea name="distribucionHabitaciones" rows="2"></textarea>
+    </div>
+
+    <div class="actions">
+        <button type="button" class="btn-prev" onclick="prevStep(3)">Anterior</button>
+        <button type="button" class="btn-next" onclick="nextStep(5)">Siguiente Sección</button>
+    </div>
+</div>
+
+<div class="form-step" data-step="5">
+    <h2>V. ANTECEDENTES PRENATALES</h2>
+
+    <div class="familiar-card">
+        <h3>PLANIFICACIÓN Y ACTITUD</h3>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>¿El embarazo fue planeado?</label>
+                <select name="embarazoPlaneado">
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>¿El sexo fue el deseado?</label>
+                <select name="sexoDeseado">
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>¿El niño fue deseado? (explique):</label>
+            <textarea name="ninoDeseadoExplica" rows="2"></textarea>
+        </div>
+        <div class="input-group">
+            <label>Si no fue deseado, ¿intentó abortar?</label>
+            <input type="text" name="intentoAborto">
+        </div>
+        <div class="input-group">
+            <label>Actitud de los padres ante el embarazo:</label>
+            <textarea name="actitudPadresEmbarazo" rows="2"></textarea>
+        </div>
+    </div>
+
+    <div class="familiar-card">
+        <h3>HISTORIAL GESTACIONAL</h3>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>Número de este embarazo:</label>
+                <input type="number" name="numeroEmbarazo">
+            </div>
+            <div class="input-group">
+                <label>¿Hubo abortos previos?</label>
+                <input type="text" name="abortosPrevios" placeholder="Indicar si fue natural o inducido">
+            </div>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>¿Desde cuándo controló el embarazo?</label>
+                <input type="text" name="inicioControl">
+            </div>
+            <div class="input-group">
+                <label>Kilos aumentados:</label>
+                <input type="text" name="kilosAumento">
+            </div>
+        </div>
+    </div>
+
+    <div class="familiar-card highlight">
+        <h3>COMPLICACIONES DURANTE EL EMBARAZO</h3>
+        <p class="sub-label">Marque o describa si presentó alguna de las siguientes y en qué período:</p>
+        <div class="checklist-grid">
+            <div class="check-item"><input type="checkbox" name="comp_infecciosas"> Enfermedades Infecciosas</div>
+            <div class="check-item"><input type="checkbox" name="comp_amenaza_aborto"> Amenazas de aborto</div>
+            <div class="check-item"><input type="checkbox" name="comp_parto_prem"> Amenaza parto prematuro</div>
+            <div class="check-item"><input type="checkbox" name="comp_membrana"> Ruptura de membrana</div>
+            <div class="check-item"><input type="checkbox" name="comp_trauma"> Traumatismo abdominal</div>
+            <div class="check-item"><input type="checkbox" name="comp_emocional"> Impactos emocionales</div>
+            <div class="check-item"><input type="checkbox" name="comp_diabetes"> Diabetes mellitus</div>
+            <div class="check-item"><input type="checkbox" name="comp_tension"> Hipertensión arterial</div>
+            <div class="check-item"><input type="checkbox" name="comp_convulsion"> Convulsiones</div>
+            <div class="check-item"><input type="checkbox" name="comp_preeclampsia"> Preeclampsia</div>
+        </div>
+        <div class="input-group" style="margin-top:15px;">
+            <label>Otras complicaciones y período:</label>
+            <textarea name="otrasComplicaciones" rows="2"></textarea>
+        </div>
+    </div>
+
+    <div class="familiar-card">
+        <h3>HÁBITOS DURANTE EL EMBARAZO</h3>
+        <div class="checklist-grid">
+            <div class="check-item"><input type="checkbox" name="hab_cafe"> Café</div>
+            <div class="check-item"><input type="checkbox" name="hab_cigarro"> Cigarro</div>
+            <div class="check-item"><input type="checkbox" name="hab_alcohol"> Alcohol</div>
+            <div class="check-item"><input type="checkbox" name="hab_drogas"> Drogas</div>
+        </div>
+        <div class="input-group" style="margin-top:15px;">
+            <label>Medicamentos u otros hábitos:</label>
+            <input type="text" name="otrosHabitosMedicamentos">
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="button" class="btn-prev" onclick="prevStep(4)">Anterior</button>
+        <button type="button" class="btn-next" onclick="nextStep(6)">Siguiente Sección</button>
+    </div>
+</div>
+<div class="form-step" data-step="6">
+    <h2>VI. NACIMIENTO</h2>
+
+    <div class="familiar-card">
+        <h3>DETALLES DEL PARTO</h3>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>Edad de la madre al parto:</label>
+                <input type="text" name="edadMadreParto">
+            </div>
+            <div class="input-group">
+                <label>Edad gestacional (semanas):</label>
+                <input type="text" name="semanasGestacion">
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Tipo de parto (si fue cesárea, indique la causa):</label>
+            <textarea name="tipoPartoCausa" rows="2"></textarea>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>Duración trabajo de parto:</label>
+                <input type="text" name="duracionParto">
+            </div>
+            <div class="input-group">
+                <label>Presentación del neonato:</label>
+                <input type="text" name="presentacionNeonato" placeholder="Cefálica, podálica, etc.">
+            </div>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>¿Requirió Fórceps?</label>
+                <select name="requirioForceps">
+                    <option value="no">No</option>
+                    <option value="si">Sí</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>¿Requirió anestesia?</label>
+                <input type="text" name="anestesiaDetalles">
+            </div>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>Peso al nacer:</label>
+                <input type="text" name="pesoNacer">
+            </div>
+            <div class="input-group">
+                <label>Talla al nacer:</label>
+                <input type="text" name="tallaNacer">
+            </div>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>¿Respiró normalmente?</label>
+                <select name="respiroNormal">
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>¿Lloró espontáneamente?</label>
+                <select name="lloroEspontaneo">
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="familiar-card highlight">
+        <h3>COMPLICACIONES NEONATALES</h3>
+        <p class="sub-label">Marque si el recién nacido sufrió alguna de las siguientes:</p>
+        <div class="checklist-grid three-cols">
+            <div class="check-item"><input type="checkbox" name="neo_asfixia"> Asfixia</div>
+            <div class="check-item"><input type="checkbox" name="neo_ausencias"> Ausencias</div>
+            <div class="check-item"><input type="checkbox" name="neo_meconial"> Aspiración Meconial</div>
+            <div class="check-item"><input type="checkbox" name="neo_cardiopatia"> Cardiopatía</div>
+            <div class="check-item"><input type="checkbox" name="neo_cefalo"> Cefalohematoma</div>
+            <div class="check-item"><input type="checkbox" name="neo_cianosis"> Cianosis</div>
+            <div class="check-item"><input type="checkbox" name="neo_colicos"> Cólicos</div>
+            <div class="check-item"><input type="checkbox" name="neo_convulsion"> Convulsión</div>
+            <div class="check-item"><input type="checkbox" name="neo_fiebre"> Fiebre</div>
+            <div class="check-item"><input type="checkbox" name="neo_hemorragia"> Hemorr. Intracraneal</div>
+            <div class="check-item"><input type="checkbox" name="neo_hiperbilirrubina"> Hiperbilirrubinemia</div>
+            <div class="check-item"><input type="checkbox" name="neo_hiperglicemia"> Hiperglicemia</div>
+            <div class="check-item"><input type="checkbox" name="neo_hipoglicemia"> Hipoglicemia</div>
+            <div class="check-item"><input type="checkbox" name="neo_hipocalcemia"> Hipocalcemia</div>
+            <div class="check-item"><input type="checkbox" name="neo_hiper_tiro"> Hipertiroidismo</div>
+            <div class="check-item"><input type="checkbox" name="neo_hipo_tiro"> Hipotiroidismo</div>
+            <div class="check-item"><input type="checkbox" name="neo_hipoxia"> Hipoxia</div>
+            <div class="check-item"><input type="checkbox" name="neo_ictericia"> Ictericia</div>
+            <div class="check-item"><input type="checkbox" name="neo_incompatibilidad"> Incompatibilidad</div>
+            <div class="check-item"><input type="checkbox" name="neo_infecciones"> Infecciones</div>
+            <div class="check-item"><input type="checkbox" name="neo_malformacion"> Malformaciones</div>
+            <div class="check-item"><input type="checkbox" name="neo_hialina"> Membrana Hialina</div>
+            <div class="check-item"><input type="checkbox" name="neo_oftalmia"> Oftalmia</div>
+            <div class="check-item"><input type="checkbox" name="neo_shock"> Shock</div>
+            <div class="check-item"><input type="checkbox" name="neo_sufrimiento"> Sufrimiento fetal</div>
+            <div class="check-item"><input type="checkbox" name="neo_taquipnea"> Taquipnea Trans.</div>
+            <div class="check-item"><input type="checkbox" name="neo_trauma"> Trauma Obstétrico</div>
+            <div class="check-item"><input type="checkbox" name="neo_vomitos"> Vómitos</div>
+            <div class="check-item"><input type="checkbox" name="neo_sepsis"> Sepsis</div>
+        </div>
+        <div class="input-group" style="margin-top:20px;">
+            <label>Explique evolución de las complicaciones marcadas:</label>
+            <textarea name="evolucionComplicacionesNeo" rows="2"></textarea>
+        </div>
+    </div>
+
+    <div class="familiar-card">
+        <h3>REQUERIMIENTOS ESPECIALES</h3>
+        <div class="input-group">
+            <label>¿Requirió Incubadora? (Razón y tiempo):</label>
+            <input type="text" name="incubadoraDetalles">
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>¿Requirió Medicamentos?</label>
+                <input type="text" name="medicamentosNeo">
+            </div>
+            <div class="input-group">
+                <label>¿Tratamientos Quirúrgicos?</label>
+                <input type="text" name="cirugiasNeo">
+            </div>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>¿Requirió Reanimación?</label>
+                <input type="text" name="reanimacionNeo">
+            </div>
+            <div class="input-group">
+                <label>¿Ventilación Mecánica?</label>
+                <input type="text" name="ventilacionNeo">
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Otros:</label>
+            <input type="text" name="otrosNeo">
+        </div>
+    </div>
+
+    <div class="familiar-card highlight">
+        <h3>PRIMER MES DE VIDA</h3>
+        <div class="input-group">
+            <label>¿Dormía tranquilo en forma regular?</label>
+            <textarea name="suenoPrimerMes" rows="2"></textarea>
+        </div>
+        <div class="input-group">
+            <label>¿Podía reconocer por su llanto lo que necesitaba?</label>
+            <textarea name="reconocimientoLlanto" rows="2"></textarea>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="button" class="btn-prev" onclick="prevStep(5)">Anterior</button>
+        <button type="button" class="btn-next" onclick="nextStep(7)">Siguiente Sección</button>
+    </div>
+</div>
+<div class="form-step" data-step="7">
+    <h2>VII. ALIMENTACIÓN</h2>
+
+    <div class="familiar-card">
+        <h3>LACTANCIA Y FÓRMULA</h3>
+        <div class="input-group">
+            <label>¿Disfrutó de Lactancia Materna exclusiva? ¿Cuánto tiempo? ¿Comió suficiente y a sus horas?</label>
+            <textarea name="lactanciaExclusivaDetalles" rows="2"></textarea>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>Edad inicio de fórmula:</label>
+                <input type="text" name="edadFormulaInicio">
+            </div>
+            <div class="input-group">
+                <label>Especifique la fórmula:</label>
+                <input type="text" name="especifiqueFormula">
+            </div>
+        </div>
+        <div class="input-group">
+            <label>¿Cuándo suspendió la lactancia materna definitivamente?</label>
+            <input type="text" name="suspensionLactancia">
+        </div>
+    </div>
+
+    <div class="familiar-card">
+        <h3>ABLANTACIÓN (INTRODUCCIÓN DE ALIMENTOS)</h3>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>Inicio de semisólidos y cuáles:</label>
+                <textarea name="semisolidosDetalles" rows="2" placeholder="Papillas, compotas..."></textarea>
+            </div>
+            <div class="input-group">
+                <label>Inicio de sólidos y cuáles:</label>
+                <textarea name="solidosDetalles" rows="2" placeholder="Carnes, granos, trozos..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="familiar-card highlight">
+        <h3>DIETA ACTUAL Y SELECTIVIDAD</h3>
+        <div class="input-group">
+            <label>¿Cómo es la dieta actual?</label>
+            <textarea name="dietaActual" rows="2"></textarea>
+        </div>
+        
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>¿Es selectivo con los alimentos?</label>
+                <select name="esSelectivo">
+                    <option value="no">No</option>
+                    <option value="si">Sí</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Alimentos que prefiere:</label>
+                <input type="text" name="alimentosPreferidos">
+            </div>
+        </div>
+
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>Alimentos que le disgustan:</label>
+                <input type="text" name="alimentosDisgustan">
+            </div>
+            <div class="input-group">
+                <label>Intolerancia a alimentos:</label>
+                <input type="text" name="intoleranciasAlimentarias" placeholder="Especifique cuáles">
+            </div>
+        </div>
+    </div>
+
+    <div class="familiar-card">
+        <h3>HÁBITOS EN LA MESA</h3>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>¿Come solo?</label>
+                <select name="comeSolo">
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                    <option value="ayuda">Requiere ayuda</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>¿Se sienta y termina su comida?</label>
+                <select name="terminaComida">
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                    <option value="aveces">A veces</option>
+                </select>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>¿Cumple o tiene indicada alguna dieta o régimen particular?</label>
+            <textarea name="dietaEspecialDetalles" rows="2"></textarea>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="button" class="btn-prev" onclick="prevStep(6)">Anterior</button>
+        <button type="button" class="btn-next" onclick="nextStep(8)">Siguiente Sección</button>
+    </div>
+</div>
+<div class="form-step" data-step="8">
+    <h2>VIII. DESARROLLO EVOLUTIVO</h2>
+
+    <div class="nota-padres">
+        <div class="nota-contenido">
+            <p><strong>Nota para los representantes:</strong> Esta sección es detallada para comprender mejor el crecimiento de su hijo(a). Tómense su tiempo para recordar las edades aproximadas; si no las precisan, pueden colocar un estimado.</p>
+        </div>
+    </div>
+
+    <div class="familiar-card">
+        <h3>1. DESARROLLO MOTOR</h3>
+        <div class="grid-inputs">
+            <div class="input-group"><label>Control cefálico (sostener cabeza):</label><input type="text" name="motor_cabezal"></div>
+            <div class="input-group"><label>Rolado (voltearse en cama):</label><input type="text" name="motor_rolado"></div>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group"><label>Gateo (edad y cómo lo hizo):</label><input type="text" name="motor_gateo"></div>
+            <div class="input-group"><label>Sentarse solo (edad):</label><input type="text" name="motor_sentarse"></div>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group"><label>Pararse solo (edad):</label><input type="text" name="motor_pararse"></div>
+            <div class="input-group"><label>Caminar solo (edad):</label><input type="text" name="motor_caminar"></div>
+        </div>
+        <div class="input-group">
+            <label>¿Se defendía al caer? (¿Metía las manos o se pegaba en la cara?):</label>
+            <input type="text" name="motor_caidas">
+        </div>
+        <div class="input-group">
+            <label>¿Hay algo raro en su manera de caminar?</label>
+            <input type="text" name="motor_camina_raro">
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>Habilidad para agarrar cosas:</label>
+                <input type="text" name="motor_agarre">
+            </div>
+            <div class="input-group">
+                <label>Objetos con dos manos (edad):</label>
+                <input type="text" name="motor_dos_manos">
+            </div>
+        </div>
+        <div class="input-group">
+            <label>¿A qué edad comenzó a pasarse los objetos de una mano a otra?</label>
+            <input type="text" name="motor_cambio_mano">
+        </div>
+        <div class="input-group">
+            <label>¿Considera el desarrollo normal o retrasado? ¿Presenta movimientos persistentes (vueltas, brincos, carreras)?</label>
+            <textarea name="motor_observacion_padres" rows="2"></textarea>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group"><label>¿Cree que tiene trastornos motores?</label><input type="text" name="motor_trastorno_creencia"></div>
+            <div class="input-group"><label>¿Ha sido evaluado?</label><input type="text" name="motor_evaluado"></div>
+        </div>
+        <div class="input-group">
+            <label>¿Cuándo mostró por primera vez dificultades motoras?</label>
+            <input type="text" name="motor_primera_dificultad">
+        </div>
+    </div>
+
+    <div class="familiar-card highlight">
+        <h3>2. DESARROLLO DEL LENGUAJE</h3>
+        
+        <div class="grid-inputs">
+            <div class="input-group"><label>Inicio de Balbuceo:</label><input type="text" name="len_balbuceo"></div>
+            <div class="input-group"><label>Inicio de Silabaciones:</label><input type="text" name="len_silabas"></div>
+        </div>
+        <div class="input-group">
+            <label>Primeras palabras SIN significado (cuáles):</label>
+            <input type="text" name="len_palabras_sin_sig">
+        </div>
+        <div class="input-group">
+            <label>Primeras palabras CON significado (aparte de mamá/papá) (d9):</label>
+            <input type="text" name="len_palabras_con_sig">
+        </div>
+        <div class="input-group">
+            <label>Uso del pronombre "YO" o confusión pronominal (él/tú) (b37):</label>
+            <input type="text" name="len_pronombre_yo">
+        </div>
+
+        <h4>Comprensión:</h4>
+        <div class="input-group">
+            <label>¿Comprende órdenes simples? (ven, siéntate, dame). Explique:</label>
+            <textarea name="len_comp_1" rows="2"></textarea>
+        </div>
+        <div class="input-group">
+            <label>¿Comprende secuencias de 2? (Busca zapatos y guárdalos). Explique:</label>
+            <textarea name="len_comp_2" rows="2"></textarea>
+        </div>
+        <div class="input-group">
+            <label>¿Comprende secuencias de 3? (Sube, prende luz, trae llaves). Explique:</label>
+            <textarea name="len_comp_3" rows="2"></textarea>
+        </div>
+
+        <h4>Interacción Verbal:</h4>
+        <div class="input-group"><label>¿Responde SI/NO a preguntas simples? (b43-44):</label><input type="text" name="len_si_no"></div>
+        <div class="input-group"><label>Responde: ¿Cómo te llamas? ¿Edad? ¿Dónde está mamá?</label><input type="text" name="len_preg_pers"></div>
+        <div class="input-group"><label>Preguntas complejas (ej: ¿Qué haces si tienes frío?):</label><input type="text" name="len_preg_comp"></div>
+
+        <h4>Reconocimiento y Nominación:</h4>
+        <p class="sub-label">Indique qué RECONOCE y qué NOMBRA (vía señas, gestos o palabras):</p>
+        <div class="input-group">
+            <textarea name="len_reconoce_nombra" rows="4" placeholder="Ej: Reconoce animales y colores. Nombra alimentos con señas..."></textarea>
+        </div>
+
+        <h4>Capacidades en Comunicación:</h4>
+        <div class="checklist-grid three-cols">
+            <div class="check-item"><input type="checkbox" name="com_llamar"> Llamar personas</div>
+            <div class="check-item"><input type="checkbox" name="com_pedir_alim"> Pedir alimentos</div>
+            <div class="check-item"><input type="checkbox" name="com_pedir_jug"> Pedir juguetes</div>
+            <div class="check-item"><input type="checkbox" name="com_pedir_ayuda"> Pedir ayuda</div>
+            <div class="check-item"><input type="checkbox" name="com_rechazo"> Expresar rechazo</div>
+            <div class="check-item"><input type="checkbox" name="com_atencion"> Llamar atención</div>
+        </div>
+
+        <div class="input-group" style="margin-top:20px;">
+            <label>¿Invierten, sustituyen u omiten sílabas? (Cuáles):</label>
+            <input type="text" name="len_errores_silabas">
+        </div>
+        <div class="input-group">
+            <label>¿Usa frases raras, inventadas o repite lo que oye fuera de contexto? (b33, b38):</label>
+            <textarea name="len_frases_inusuales" rows="2"></textarea>
+        </div>
+        <div class="input-group">
+            <label>¿Muestra cosas por el simple placer de compartir el interés? (a54):</label>
+            <input type="text" name="len_compartir_interes">
+        </div>
+    </div>
+
+    <div class="familiar-card">
+        <h3>3. AUDICIÓN Y VISIÓN</h3>
+        <div class="grid-inputs">
+            <div class="input-group"><label>¿Oye bien? (¿Evaluaciones?):</label><input type="text" name="aud_general"></div>
+            <div class="input-group"><label>¿Ve bien? (¿Evaluaciones?):</label><input type="text" name="vis_general"></div>
+        </div>
+        <div class="input-group">
+            <label>¿Qué hace si entra en un cuarto y habla sin llamarle por su nombre? (e):</label>
+            <input type="text" name="aud_reaccion_voz">
+        </div>
+        <div class="input-group">
+            <label>¿Le mira directamente a la cara cuando le habla? (a50):</label>
+            <select name="vis_contacto_visual">
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+                <option value="aveces">A veces</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="familiar-card">
+        <h3>4. HÁBITOS, JUEGO Y SOCIALIZACIÓN</h3>
+        <div class="input-group">
+            <label>Control de esfínteres (Vesical/Rectal - Diurno/Nocturno):</label>
+            <input type="text" name="soc_esfinteres" placeholder="Indicar edades">
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group"><label>Horas de sueño nocturno:</label><input type="text" name="soc_sueno_horas"></div>
+            <div class="input-group"><label>¿Duerme tranquilo?</label><input type="text" name="soc_sueno_tranquilo"></div>
+        </div>
+        
+        <h4>Interacción y Juego:</h4>
+        <div class="input-group">
+            <label>¿Interactúa en el juego con otros niños o solo juega a su lado? (a49):</label>
+            <textarea name="soc_juego_pares" rows="2"></textarea>
+        </div>
+        <div class="input-group">
+            <label>¿Realiza juego simbólico (merienda, carreras, muñecos hablan)? (b48):</label>
+            <textarea name="soc_juego_simbolico" rows="2"></textarea>
+        </div>
+        <div class="input-group">
+            <label>¿Tiene intereses sensoriales inusuales (tacto, olfato, gusto hacia objetos)? (c71):</label>
+            <input type="text" name="soc_sensorial_inusual">
+        </div>
+        <div class="input-group">
+            <label>¿Muestra reciprocidad social? (Sonríe si le sonríen, trata de consolar si lo ve triste):</label>
+            <textarea name="soc_reciprocidad" rows="2"></textarea>
+        </div>
+        <div class="input-group">
+            <label>¿Presenta movimientos extraños de manos o cuerpo (estereotipias)? (c77):</label>
+            <textarea name="soc_movimientos_extraños" rows="2"></textarea>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="button" class="btn-prev" onclick="prevStep(7)">Anterior</button>
+        <button type="button" class="btn-next" onclick="nextStep(9)">Siguiente Sección</button>
+    </div>
+</div>
+<div class="form-step" data-step="9">
+    <h2>IX. ACCIDENTES O ENFERMEDADES</h2>
+
+    <div class="nota-informativa">
+        <p>✨ <strong>Nota:</strong> Conocer los antecedentes de salud nos permite cuidar mejor el bienestar integral de su hijo(a). Por favor, indíquenos cualquier detalle que considere importante.</p>
+    </div>
+
+    <div class="familiar-card card-accidentes">
+        <h3>🚨 ACCIDENTES Y CIRUGÍAS</h3>
+        <div class="input-group">
+            <label>¿Ha sufrido algún accidente? (¿Cuándo y de qué tipo?):</label>
+            <textarea name="salud_accidentes" rows="2" placeholder="Describa caídas, fracturas, intoxicaciones..."></textarea>
+        </div>
+        <div class="input-group">
+            <label>¿Ha requerido alguna operación? (¿Cuándo y de qué tipo?):</label>
+            <textarea name="salud_operaciones" rows="2"></textarea>
+        </div>
+    </div>
+
+    <div class="familiar-card card-medicos">
+        <h3>🩺 CONTROL MÉDICO Y TRATAMIENTOS</h3>
+        <div class="input-group">
+            <label>¿Recibe algún tratamiento medicamentoso actualmente? (Razón):</label>
+            <textarea name="salud_tratamiento_actual" rows="2"></textarea>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>Médico tratante (Especialidad/Motivo):</label>
+                <input type="text" name="salud_medico_especialista">
+            </div>
+            <div class="input-group">
+                <label>Pediatra que lo controla:</label>
+                <input type="text" name="salud_pediatra">
+            </div>
+        </div>
+        <div class="input-group">
+            <label>¿Tiene sus vacunas completas?</label>
+            <select name="salud_vacunas">
+                <option value="si">Sí, esquema completo</option>
+                <option value="no">No / Incompleto</option>
+                <option value="proceso">En proceso</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="familiar-card highlight">
+        <h3>📋 REGISTRO DE ENFERMEDADES</h3>
+        <p class="sub-label">Por favor, marque las que ha presentado e indique si son frecuentes:</p>
+        
+        <div class="checklist-grid three-cols">
+            <div class="check-group">
+                <p><strong>Respiratorias:</strong></p>
+                <div class="check-item"><input type="checkbox" name="enf_asma"> Asma</div>
+                <div class="check-item"><input type="checkbox" name="enf_bronquiolitis"> Bronquiolitis</div>
+                <div class="check-item"><input type="checkbox" name="enf_neumonia"> Neumonía</div>
+                <div class="check-item"><input type="checkbox" name="enf_rinofaringitis"> Rinofaringitis</div>
+                <div class="check-item"><input type="checkbox" name="enf_gripe"> Gripe</div>
+            </div>
+
+            <div class="check-group">
+                <p><strong>Infecciosas:</strong></p>
+                <div class="check-item"><input type="checkbox" name="enf_sarampion"> Sarampión</div>
+                <div class="check-item"><input type="checkbox" name="enf_rubeola"> Rubéola</div>
+                <div class="check-item"><input type="checkbox" name="enf_varicela"> Varicela</div>
+                <div class="check-item"><input type="checkbox" name="enf_citomegalovirus"> Citomegalovirus</div>
+                <div class="check-item"><input type="checkbox" name="enf_herpes"> Herpes</div>
+            </div>
+
+            <div class="check-group">
+                <p><strong>Digestivas/Otros:</strong></p>
+                <div class="check-item"><input type="checkbox" name="enf_reflujo"> Reflujo (Buche)</div>
+                <div class="check-item"><input type="checkbox" name="enf_diarrea"> Diarrea</div>
+                <div class="check-item"><input type="checkbox" name="enf_parasitosis"> Parasitosis</div>
+                <div class="check-item"><input type="checkbox" name="enf_vomito"> Vómito</div>
+                <div class="check-item"><input type="checkbox" name="enf_alergia"> Alergia</div>
+            </div>
+        </div>
+
+        <div class="input-group" style="margin-top:20px;">
+            <label>Otras (Meningitis, Otitis, Convulsiones, Sida, Sífilis, Toxoplasmosis, etc.):</label>
+            <textarea name="salud_otras_enfermedades" rows="2" placeholder="Especifique cuáles y frecuencia..."></textarea>
+        </div>
+    </div>
+
+    <div class="familiar-card" style="border: 2px solid #3498db;">
+        <h3>💭 SU VOZ COMO MADRE/PADRE</h3>
+        <div class="input-group">
+            <label>¿Tiene alguna inquietud en cuanto a la salud de su hijo o hija?</label>
+            <textarea name="salud_inquietudes_padres" rows="3" placeholder="Escriba aquí sus dudas o miedos específicos..."></textarea>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="button" class="btn-prev" onclick="prevStep(8)">Anterior</button>
+        <button type="button" class="btn-next" onclick="nextStep(10)">Siguiente Sección</button>
+    </div>
+</div>
+<div class="form-step" data-step="10">
+    <h2>X. ESCOLARIDAD</h2>
+
+    <div class="familiar-card">
+        <h3>📚 HISTORIA Y ADAPTACIÓN</h3>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>Edad de ingreso a la escuela:</label>
+                <input type="text" name="esc_edad_ingreso">
+            </div>
+            <div class="input-group">
+                <label>Actitud inicial ante la escuela:</label>
+                <input type="text" name="esc_actitud_inicial">
+            </div>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>¿Ha repetido grado? (¿Cuál?):</label>
+                <input type="text" name="esc_repitencia">
+            </div>
+            <div class="input-group">
+                <label>¿Alcanza objetivos mínimos?</label>
+                <select name="esc_objetivos_minimos">
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                    <option value="proceso">En proceso</option>
+                </select>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Interrupciones prolongadas y causa:</label>
+            <textarea name="esc_interrupciones" rows="2"></textarea>
+        </div>
+        <div class="input-group">
+            <label>Cambios de escuela (Cuándo y cuáles):</label>
+            <textarea name="esc_cambios_institucion" rows="2"></textarea>
+        </div>
+    </div>
+
+    <div class="familiar-card highlight">
+        <h3>✍️ RENDIMIENTO Y COMPETENCIAS</h3>
+        <p class="sub-label">Describa brevemente el nivel de desempeño en:</p>
+        <div class="grid-inputs">
+            <div class="input-group"><label>Escritura:</label><input type="text" name="rend_escritura"></div>
+            <div class="input-group"><label>Lectura:</label><input type="text" name="rend_lectura"></div>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group"><label>Cálculo:</label><input type="text" name="rend_calculo"></div>
+            <div class="input-group"><label>Interacción Social:</label><input type="text" name="rend_social"></div>
+        </div>
+        <div class="input-group">
+            <label>Materias con dificultad (y desde qué grado):</label>
+            <input type="text" name="rend_dificultades">
+        </div>
+        <div class="input-group">
+            <label>Materias que más le gustan:</label>
+            <input type="text" name="rend_preferidas">
+        </div>
+    </div>
+
+    <div class="familiar-card">
+        <h3>🏠 EL ESTUDIO EN EL HOGAR</h3>
+        <div class="input-group">
+            <label>¿Cómo afronta las tareas y qué estrategias usa?</label>
+            <textarea name="casa_estrategias_tareas" rows="2"></textarea>
+        </div>
+        <div class="grid-inputs">
+            <div class="input-group"><label>Hora de tareas:</label><input type="text" name="casa_hora_tareas"></div>
+            <div class="input-group"><label>Lugar de estudio:</label><input type="text" name="casa_lugar_tareas"></div>
+        </div>
+        <div class="input-group">
+            <label>¿Qué lo motiva? Reacción ante logros y fracasos (ejemplos):</label>
+            <textarea name="casa_motivacion_reaccion" rows="2"></textarea>
+        </div>
+        <div class="input-group">
+            <label>¿Muestra a otros cuando algo le emociona o sale bien? (a):</label>
+            <select name="casa_comparte_logros">
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+                <option value="aveces">A veces</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="familiar-card card-escuela">
+        <h3>🏫 EVALUACIÓN DE LA INSTITUCIÓN (COAR)</h3>
+        <p class="sub-label">Su opinión sobre el entorno escolar actual:</p>
+        
+        <div class="checklist-grid three-cols">
+            <div class="check-item"><input type="checkbox" name="coar_mantenimiento"> Planta bien mantenida</div>
+            <div class="check-item"><input type="checkbox" name="coar_recreo"> Espacio para recreo</div>
+            <div class="check-item"><input type="checkbox" name="coar_aulas"> Aulas adecuadas</div>
+            <div class="check-item"><input type="checkbox" name="coar_carteleras"> Carteleras frecuentes</div>
+            <div class="check-item"><input type="checkbox" name="coar_reglas"> Reglas claras</div>
+            <div class="check-item"><input type="checkbox" name="coar_disciplina"> Buen control disciplinario</div>
+            <div class="check-item"><input type="checkbox" name="coar_biblioteca"> Uso de biblioteca</div>
+            <div class="check-item"><input type="checkbox" name="coar_buen_trato"> Trato digno del personal</div>
+        </div>
+
+        <h4 style="margin-top:20px; font-size: 0.9rem;">Relación con Maestros y Directivos:</h4>
+        <div class="input-group">
+            <label>¿La maestra se comunica ante preocupaciones o alegrías?</label>
+            <textarea name="coar_comunicacion_maestra" rows="2"></textarea>
+        </div>
+        <div class="input-group">
+            <label>¿El equipo directivo supervisa y apoya a los maestros?</label>
+            <select name="coar_apoyo_directivo">
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+                <option value="desconoce">No lo sé</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="button" class="btn-prev" onclick="prevStep(9)">Anterior</button>
+        <button type="button" class="btn-next" onclick="nextStep(11)">Siguiente Sección</button>
+    </div>
+</div>
+<div class="form-step" data-step="11">
+    <h2>XI. ENTORNO Y COMUNIDAD (COAR)</h2>
+
+    <div class="familiar-card card-comunidad">
+        <h3>🏡 PERCEPCIÓN DEL ENTORNO</h3>
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>¿Le agrada el lugar donde vive y preferiría no mudarse?</label>
+                <select name="com_agrado_vivienda">
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                    <option value="indiferente">Indiferente</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>¿Cuentan con servicios de emergencia efectivos?</label>
+                <p class="sub-label">(Salud, ambulancia, bomberos, policía)</p>
+                <input type="text" name="com_emergencias">
+            </div>
+        </div>
+
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>¿Existen buenos servicios educativos cerca?</label>
+                <p class="sub-label">(Maternal hasta educación para adultos)</p>
+                <input type="text" name="com_educacion">
+            </div>
+            <div class="input-group">
+                <label>¿Goza de espacios recreativos?</label>
+                <p class="sub-label">(Canchas, parques, bibliotecas, casa de cultura)</p>
+                <input type="text" name="com_recreacion_espacios">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>¿Existen asociaciones u organizaciones para niños y adultos en su comunidad?</label>
+            <input type="text" name="com_organizaciones">
+        </div>
+
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>¿Su familia hace uso de esos recursos recreativos?</label>
+                <select name="com_uso_recursos">
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                    <option value="aveces">A veces</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>¿Alguien de la familia participa en asociaciones o cooperativas?</label>
+                <input type="text" name="com_participacion_activa">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>¿Considera que su comunidad ofrece seguridad, estabilidad y buena convivencia vecinal?</label>
+            <textarea name="com_seguridad_convivencia" rows="2"></textarea>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="button" class="btn-prev" onclick="prevStep(10)">Anterior</button>
+        <button type="button" class="btn-next" onclick="nextStep(12)">Siguiente Sección</button>
+    </div>
+</div>
+
+<div class="form-step" data-step="12">
+    <h2>XII. COMPORTAMIENTO GENERAL</h2>
+
+    <div class="familiar-card highlight" style="border-left: 5px solid var(--danger);">
+        <h3>⚠️ CONDUCTA Y MANEJO EMOCIONAL</h3>
+        <p class="sub-label">Esta información es estrictamente confidencial y fundamental para el abordaje terapéutico.</p>
+        
+        <div class="input-group">
+            <label>¿En ocasiones es agresivo con sus cuidadores o miembros de la familia?</label>
+            <textarea name="beh_agresion_familia" rows="2" placeholder="Describa situaciones o frecuencia..."></textarea>
+        </div>
+
+        <div class="input-group">
+            <label>¿Es agresivo con personas fuera de la familia?</label>
+            <textarea name="beh_agresion_externa" rows="2"></textarea>
+        </div>
+
+        <div class="input-group">
+            <label>¿Alguna vez se lastimó deliberadamente? (Ej: morderse, golpearse, tirarse el cabello):</label>
+            <textarea name="beh_autolesion" rows="2" style="border: 1px solid var(--danger);"></textarea>
+        </div>
+    </div>
+
+    <div class="familiar-card">
+        <h3>💬 CIERRE Y COMENTARIOS ADICIONALES</h3>
+        <div class="input-group">
+            <label>¿Desea añadir algún otro comentario o situación que no haya sido mencionada?</label>
+            <textarea name="beh_comentarios_finales" rows="4" placeholder="Cualquier detalle adicional es valioso..."></textarea>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button type="button" class="btn-prev" onclick="prevStep(11)">Anterior</button>
+        <button type="submit" class="btn-submit">FINALIZAR Y REGISTRAR ENTREVISTA</button>
+    </div>
+</div>
+    <script src="/scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+/* ==========================================================================
+   1. VARIABLES Y CONFIGURACIÓN BASE
+   ========================================================================== */
+:root {
+    --primary: #3498db;       /* Azul Principal */
+    --secondary: #2c3e50;     /* Gris Oscuro / Títulos */
+    --success: #27ae60;       /* Verde / Botón Guardar */
+    --warning: #f1c40f;       /* Amarillo / Highlights */
+    --danger: #e74c3c;        /* Rojo / Accidentes */
+    --bg-body: #f4f7f6;       /* Fondo de la página */
+    --bg-card: #ffffff;       /* Fondo de formularios */
+    --border-color: #dde1e3;  /* Color de bordes */
+    --text-main: #333;        /* Color de texto principal */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Contenedor principal del formulario */
+.form-container {
+    background: var(--bg-card);
+    width: 100%;
+    max-width: 900px;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* ==========================================================================
+   2. ENCABEZADO Y BARRA DE PROGRESO
+   ========================================================================== */
+header h1 {
+    text-align: center;
+    color: var(--secondary);
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.progress-bar {
+    background: #e0e0e0;
+    height: 8px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+img {
+    width: 80px;
+}
+.progress {
+    background: linear-gradient(90deg, var(--primary), #5dade2);
+    height: 100%;
+    width: 8.33%; /* Cambia dinámicamente con JS */
+    transition: width 0.4s ease-in-out;
+}
+
+/* ==========================================================================
+   3. BLOQUES DE TEXTO INFORMATIVO (NOTAS)
+   ========================================================================== */
+/* Nota inicial para los padres */
+.nota-padres {
+    background-color: #e3f2fd;
+    border-left: 5px solid var(--primary);
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    display: flex;
+    gap: 15px;
+}
+
+.nota-contenido p {
+    margin: 0 0 8px 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #1565c0;
+}
+
+/* Nota informativa simple entre secciones */
+.nota-informativa {
+    background: #f8f9fa;
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 8px;
+    font-style: italic;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+/* ==========================================================================
+   4. ESTRUCTURA DE PASOS (STEPS) Y TARJETAS
+   ========================================================================== */
+.form-step {
+    display: none; /* Se ocultan por defecto */
+}
+
+.form-step.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Títulos de cada sección */
+h2 {
+    background: var(--secondary);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+/* Tarjetas para agrupar información (Madre, Padre, etc.) */
+.familiar-card {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+    transition: box-shadow 0.3s;
+}
+
+.familiar-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.familiar-card h3 {
+    margin-top: 0;
+    font-size: 1rem;
+    color: var(--primary);
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Resaltado para secciones críticas (como Complicaciones o Autismo) */
+.familiar-card.highlight {
+    background: #fffcf0;
+    border-color: var(--warning);
+}
+
+/* ==========================================================================
+   5. INPUTS, TEXTAREAS Y GRID
+   ========================================================================== */
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Inputs de solo lectura (Número de Historia) */
+.input-readonly {
+    background-color: #f1f3f4 !important;
+    font-weight: bold;
+    color: #555;
+    cursor: not-allowed;
+}
+
+/* Diseño en columnas para formularios */
+.grid-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* ==========================================================================
+   6. CHECKBOXES Y LISTAS (ENFERMEDADES)
+   ========================================================================== */
+.checklist-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.three-cols {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+}
+
+.check-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   7. BOTONES DE NAVEGACIÓN
+   ========================================================================== */
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+button {
+    padding: 14px 25px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+}
+
+.btn-next {
+    background: var(--primary);
+    color: white;
+    flex-grow: 1;
+}
+
+.btn-prev {
+    background: #bdc3c7;
+    color: #2c3e50;
+}
+
+.btn-submit {
+    background: var(--success);
+    color: white;
+    width: 100%;
+}
+
+button:hover {
+    filter: brightness(0.9);
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   8. RESPONSIVE (MÓVILES)
+   ========================================================================== */
+@media (max-width: 600px) {
+    .grid-inputs, .checklist-grid, .three-cols {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-container {
+        padding: 20px;
+    }
+}
+/* ==========================================================================
+   9. EFECTOS DE INTERACCIÓN (FEEDBACK VISUAL)
+   ========================================================================== */
+
+/* Cuando una tarjeta se considera completada */
+.familiar-card.completed {
+    background-color: #f0f9ff; /* Celeste muy suave */
+    border-color: #bae6fd;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.15);
+    transition: all 0.4s ease;
+}
+
+/* Pequeño check de completado que aparece en la esquina */
+.familiar-card.completed::after {
+    content: '✓';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #27ae60;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.familiar-card {
+    position: relative; /* Necesario para el check anterior */
+}
+/* Color temático para la sección escolar */
+.card-escuela {
+    border-top: 5px solid #9b59b6; /* Púrpura educativo */
+}
+
+.card-escuela h3 {
+    color: #8e44ad;
+}
+
+.sub-label {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+}
+.card-comunidad {
+    border-top: 5px solid #16a085; /* Color esmeralda para comunidad */
+}
+
+.card-comunidad h3 {
+    color: #16a085;
+}
+
+/* Estilo especial para el botón de finalizar */
+.btn-submit {
+    background: var(--success);
+    font-size: 1.1rem;
+    padding: 18px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.btn-submit:hover {
+    background: #219150;
+    transform: scale(1.02);
+}
