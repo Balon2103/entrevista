@@ -22,7 +22,14 @@ app.use(
 // Límite de tamaño de requests
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
+// --- RUTAS API ---
+const rutasGestion = require("./1.3-rutas/gestion.rutas.js");
+app.use("/api", rutasGestion);
 
+// --- Ruta raíz ---
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "02-interfaz", "index.html"));
+});
 // --- ARCHIVOS ESTÁTICOS ---
 app.use(express.static(path.join(__dirname, "02-interfaz/2.1-paginas")));
 app.use(
@@ -45,15 +52,6 @@ mongoose
     console.error("❌ Error crítico de conexión:");
     console.error(error.message);
   });
-
-// --- RUTAS API ---
-const rutasGestion = require("./1.3-rutas/gestion.rutas.js");
-app.use("/api", rutasGestion);
-
-// --- Ruta raíz ---
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "02-interfaz", "index.html"));
-});
 
 // --- LANZAMIENTO ---
 const PORT = process.env.PORT || 4000;
