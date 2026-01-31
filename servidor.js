@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const path = require("path");
 const cors = require("cors");
-const { v4: uuidv4 } = require("uuid"); // Para generar IDs únicas
+const { v4: uuidv4 } = require("uuid");
 
 dotenv.config();
 
@@ -25,7 +25,12 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 // --- RUTAS API ---
 const rutasGestion = require("./1.3-rutas/gestion.rutas.js");
 app.use("/api", rutasGestion);
-
+app.post("/api/generar-entrevista", (req, res) => {
+  console.log("POST /api/generar-entrevista recibido");
+  const uniqueId = uuidv4();
+  const url = `https://entrevista.fupagua.org/${uniqueId}`;
+  res.json({ url });
+});
 // --- Ruta raíz ---
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "02-interfaz", "index.html"));

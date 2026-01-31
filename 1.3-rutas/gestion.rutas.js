@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const gestionCtrl = require("../1.2-controladores/gestion.controlador.js");
-
+const { v4: uuidv4 } = require("uuid"); // Para generar IDs únicas
 // --- RUTAS PARA LA ESPECIALISTA ---
 router.post("/validar-paciente", gestionCtrl.validarOCrearCarpeta);
 
@@ -17,6 +17,12 @@ router.get("/historias/check", (req, res) => {
 router.post("/guardar-entrevista", gestionCtrl.guardarEntrevistaCompleta);
 
 // --- RUTA PARA GENERAR LINK ÚNICO ---
-router.post("/generar-entrevista", gestionCtrl.generarLinkUnico);
+router.post("/generar-entrevista", (req, res) => {
+  console.log("POST /api/generar-entrevista recibido");
+  const { v4: uuidv4 } = require("uuid");
+  const uniqueId = uuidv4();
+  const url = `https://entrevista.fupagua.org/${uniqueId}`;
+  res.json({ url });
+});
 
 module.exports = router;
