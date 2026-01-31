@@ -13,7 +13,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://www.fupagua.org", "https://fupagua.org"],
+    origin: ["*"],
     methods: ["GET", "POST"],
     credentials: true,
   }),
@@ -36,7 +36,7 @@ const rutasGestion = require("./1.3-rutas/gestion.rutas.js");
 app.use("/api", rutasGestion);
 
 // Ruta de prueba para generar enlace único
-app.post("/generar-entrevista", (req, res) => {
+app.post("/api/generar-entrevista", (req, res) => {
   console.log("📌 POST /api/generar-entrevista recibido");
   try {
     const uniqueId = uuidv4();
