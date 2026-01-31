@@ -13,8 +13,9 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://fupagua.org", // permite que el dominio principal pueda llamar al API
+    origin: ["https://www.fupagua.org", "https://fupagua.org"], // tus dominios que pueden llamar
     methods: ["GET", "POST"],
+    credentials: true,
   }),
 );
 
