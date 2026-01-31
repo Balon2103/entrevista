@@ -13,7 +13,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["*"],
+    origin: ["*"], // puedes poner dominios específicos para producción
     methods: ["GET", "POST"],
     credentials: true,
   }),
@@ -49,6 +49,32 @@ app.post("/api/generar-entrevista", (req, res) => {
       mensaje: "Error interno al generar enlace",
       error: error.message,
     });
+  }
+});
+
+// Nueva ruta: guardar la entrevista en backend
+app.post("/api/entrevistas", async (req, res) => {
+  try {
+    console.log("📌 POST /api/entrevistas recibido");
+    console.log("Body recibido:", req.body);
+
+    const { token, url } = req.body;
+
+    if (!token || !url) {
+      return res.status(400).json({ error: "Faltan datos: token o url" });
+    }
+
+    // Aquí podrías guardar en MongoDB:
+    // await Entrevista.create({ token, url, usada: false });
+
+    console.log("✅ Entrevista registrada:", { token, url });
+    res.json({
+      ok: true,
+      mensaje: "Entrevista registrada correctamente",
+    });
+  } catch (error) {
+    console.error("❌ Error guardando entrevista:", error);
+    res.status(500).json({ error: "Error interno al guardar la entrevista" });
   }
 });
 
